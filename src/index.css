@@ -108,7 +108,7 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
+  }
 
 .product-price div,
 .product-price button {
@@ -135,4 +135,18 @@ button:hover {
 
 .button-primary {
   background-color: #FFC321;
+}
+
+/* Filter */
+
+.filter {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  margin: 1rem;
+  border-bottom: 0.2rem #203040 solid;
+}
+
+.filter div {
+  flex: 1;
 }
