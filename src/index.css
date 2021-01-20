@@ -101,7 +101,7 @@ footer {
 
 .product img {
   max-width: 37rem;
-  max-height: 44rem;
+  max-height: 42rem;
 }
 
 .product-price {
@@ -119,10 +119,11 @@ footer {
 
 .product-price div {
   font-size: 2rem;
+  padding: 1.3rem;
 }
 
 button {
-  padding: 0.8rem;
+  padding: 0.6rem;
   border: 0.1rem #c0c0c0 solid;
   border-radius: 2rem;
   background-color: #f0f0f0;
@@ -223,4 +224,31 @@ form {
 input {
   padding: 0.7rem;
   border: 0.1rem solid #c0c0c0;
+}
+
+/* Product Details */
+
+.product-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-height: 50vh;
+}
+
+.product-details img {
+  max-height: 100vh;
+  max-width: 46rem;
+  margin: 0 auto;
+}
+
+.product-details-description {
+  flex: 1 1;
+  margin: 1rem;
+}
+
+.close-modal {
+  position: absolute;
+  right: 1rem;
+  top: 2.5rem;
+  z-index: 1000;
 }
