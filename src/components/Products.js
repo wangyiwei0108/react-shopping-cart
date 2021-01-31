@@ -32,12 +32,12 @@ class Products extends Component {
             <div>
                 <Fade bottom cascade>
                     {
-                        !this.props.productsX
+                        !this.props.pProducts
                         ? 
                         ( <div>Loading...</div>)
                         :
                         <ul className="products">
-                        {this.props.productsX.map((product) => { return (
+                        {this.props.pProducts.map((product) => { return (
                             <li key={product._id}>
                                 <div className="product">
                                     <a onClick={ () => this.openModal(product)}  href={"#" + product._id}>
@@ -113,7 +113,10 @@ class Products extends Component {
     }
 }
 
+// 傳進 state 以及 action。state 為 pProducts(可任意取名）值是 filteredItems，
+// 而不是 items，因為要給 filter、sort 這兩個動作所帶來的整體的 state 的連動更新
 export default connect(
-                        (state) => ({products: state.products.items}), 
+                        (state) => ({pProducts: state.products.filteredItems}), 
                         {fetchProducts}
-                    )(Products)
+                        )
+                        (Products)
