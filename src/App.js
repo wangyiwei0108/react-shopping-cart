@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import Cart from './components/Cart';
 import Filter from './components/Filter';
 import Products from './components/Products';
-import data from './data.json';
+// import data from './data.json';
 import store from './store';
 
 class App extends React.Component {
@@ -11,10 +11,10 @@ class App extends React.Component {
   constructor () {
     super ();
     this.state = {
-      products: data.products,
-      cartItems: JSON.parse(localStorage.getItem("cartItems")),
-      size: "",
-      sort: ""
+      // products: data.products,
+      cartItems: JSON.parse(localStorage.getItem("cartItems"))
+      // size: "",
+      // sort: ""
     }
   }
 
@@ -50,34 +50,34 @@ addToCart = (product) => {
   localStorage.setItem("cartItems", JSON.stringify(cartItems));
 }
 
-sortProducts = (event) => {
-  const sort = event.target.value;
-  this.setState((state) => ({
-  // 基於原來的 state 生成一個新的 state （下面將以 slice () shadow copy ）
-    sort: sort,
-    products: this.state.products.slice().sort((a, b) => (
-      sort === "lowest"?
-      ((a.price > b.price)? 1:-1):
-      sort === "highest"?
-      ((a.price < b.price)? 1:-1):
-      ((a._id > b._id)? 1:-1)
-    ))
-  }))
-}
+// sortProducts = (event) => {
+//   const sort = event.target.value;
+//   this.setState((state) => ({
+//   // 基於原來的 state 生成一個新的 state （下面將以 slice () shadow copy ）
+//     sort: sort,
+//     products: this.state.products.slice().sort((a, b) => (
+//       sort === "lowest"?
+//       ((a.price > b.price)? 1:-1):
+//       sort === "highest"?
+//       ((a.price < b.price)? 1:-1):
+//       ((a._id > b._id)? 1:-1)
+//     ))
+//   }))
+// }
 
-filterProducts = (event) => {
-  if (event.target.value === "") {
-    this.setState({
-      size: event.target.value, 
-      products: data.products});
-  } else {
-    this.setState({
-      size: event.target.value, 
-      products: data.products.filter((product)=> product.availableSizes.indexOf(event.target.value) >= 0
-      )
-    });
-  }
-};
+// filterProducts = (event) => {
+//   if (event.target.value === "") {
+//     this.setState({
+//       size: event.target.value, 
+//       products: data.products});
+//   } else {
+//     this.setState({
+//       size: event.target.value, 
+//       products: data.products.filter((product)=> product.availableSizes.indexOf(event.target.value) >= 0
+//       )
+//     });
+//   }
+// };
 
   render () {
     return (
@@ -90,14 +90,14 @@ filterProducts = (event) => {
             <div className="content">
               <div className="main">
                 <Filter 
-                count={this.state.products.length}
-                size={this.state.size}
-                sort={this.state.sort}
-                filterProducts={this.filterProducts}
-                sortProducts={this.sortProducts}
+                // count={this.state.products.length}
+                // size={this.state.size}
+                // sort={this.state.sort}
+                // filterProducts={this.filterProducts}
+                // sortProducts={this.sortProducts}
                 />
                 <Products 
-                productsX={this.state.products}
+                // products={this.state.products}
                 addToCart={this.addToCart}
                 />
               </div>
