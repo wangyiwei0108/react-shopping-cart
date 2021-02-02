@@ -4,7 +4,8 @@ import Fade from "react-reveal/Fade";
 import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom"
 import { connect } from 'react-redux';
-import { fetchProducts } from '../actions/productActions'
+import { fetchProducts } from '../actions/productActions';
+import { addToCart } from '../actions/cartActions';
 
 class Products extends Component {
 
@@ -117,6 +118,6 @@ class Products extends Component {
 // 而不是 items，因為要給 filter、sort 這兩個動作所帶來的整體的 state 的連動更新
 export default connect(
                         (state) => ({pProducts: state.products.filteredItems}), 
-                        {fetchProducts}
+                        {fetchProducts, addToCart}
                         )
                         (Products)
