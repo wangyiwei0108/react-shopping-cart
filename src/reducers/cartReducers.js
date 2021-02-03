@@ -1,6 +1,7 @@
 import { ADD_TO_CART, REMOVE_FROM_CART } from "../types";
 
 export const cartReducer = 
+// state 設定成「購物車內目前被網頁儲存的 items」
 (state = {cartItems : JSON.parse(localStorage.getItem("cartItems") || "[]")}, 
 action) => {
     switch (action.type) {

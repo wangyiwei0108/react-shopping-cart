@@ -28,10 +28,6 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  color: #ff8000;
-}
-
 header {
   grid-area: header;
   background-color: #203040;
@@ -99,6 +95,18 @@ footer {
   height: 100%;
 }
 
+.product a {
+  color: #451054;
+  font-size: 1.8rem;
+}
+
+.product a :hover{
+  color: #2C0238;
+}
+
+.product a:visited {
+  color: #724C8F;
+}
 .product img {
   max-width: 37rem;
   max-height: 42rem;
@@ -118,8 +126,12 @@ footer {
 }
 
 .product-price div {
-  font-size: 2rem;
+  font-size: 1.8rem;
   padding: 1.3rem;
+}
+
+.product-price-price {
+  padding: 10rem;
 }
 
 button {
@@ -252,4 +264,33 @@ input {
   right: 1rem;
   top: 2.5rem;
   z-index: 1000;
+}
+
+/* Order Details */
+
+.order-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.order-details li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-details li div {
+  padding: 10px;
+}
+
+.order-details .items {
+  text-align: right;
+  padding: 0;
+}
+
+.success-message {
+  color: green;
 }
