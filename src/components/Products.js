@@ -54,7 +54,7 @@ class Products extends Component {
                                         <button 
                                         className="button-primary"
                                         onClick={() => this.props.addToCart(product)}>
-                                            Add To Cart
+                                            Add
                                         </button>
                                     </div>
                                 </div>
@@ -93,13 +93,13 @@ class Products extends Component {
                                         </p>
                                         <div className="product-price">
                                             <div>
-                                                {formatCurrency(this.state.product.price)}
+                                                  {formatCurrency(this.state.product.price)}
                                                 <button 
                                                     className="button-primary" 
                                                     onClick= { () => {
                                                         this.props.addToCart(this.state.product);
                                                         this.closeModal();}}>
-                                                    Add To Cart
+                                                    Add
                                                 </button>
                                             </div>
                                         </div>
