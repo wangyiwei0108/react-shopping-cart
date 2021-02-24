@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Cart from '../components/Cart'
 import Filter from '../components/Filter'
 import Products from '../components/Products'
+import Scroll from '../components/Scroll'
 
 export default class HomeScreen extends Component {
     render() {
@@ -16,10 +17,12 @@ export default class HomeScreen extends Component {
                   // filterProducts={this.filterProducts}
                   // sortProducts={this.sortProducts}
                   />
+                  <Scroll>
                   <Products 
                   // products={this.state.products}
                   // addToCart={this.addToCart}
                   />
+                  </Scroll>
                 </div>
                 <div className="sidebar">
                   <Cart 
@@ -28,6 +31,7 @@ export default class HomeScreen extends Component {
                   // createOrder={this.createOrder}
                   />
                 </div>
+                
               </div>
             </div>
         )
