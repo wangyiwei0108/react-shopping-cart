@@ -6,15 +6,23 @@ const shortid = require("shortid");
 const app = express();
 app.use(bodyParser.json());
 
+// 以下兩個設定讓 development mode 轉為 prodcution mode
+// localhost:5000/
+app.use("/", express.static(__dirname + "/build"));
+app.get("/", (req, res) => res.sendFile(__dirname + "/build/index.html"))
+
 
 // initialize mongo database 有兩個 parameters
     // 第一個、連接到 mongodb database 的 url
     // 第二個、幾個讓 connection 優化的設定
-mongoose.connect("mongodb://localhost/react-shopping-cart-db", {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true
-})
+mongoose.connect(
+    process.env.MONGODB_URL || "mongodb://localhost/react-shopping-cart-db", 
+    {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true
+    }
+);
 
 // 在 db 裡面定義 model
 
