@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'; 
 import formatCurrency from '../util';
 import Fade from "react-reveal/Fade";
 import Modal from "react-modal";
@@ -8,7 +8,7 @@ import { removeFromCart } from '../actions/cartActions';
 import { createOrder, clearOrder } from "../actions/orderActions";
 
 class Cart extends Component {
-    
+     
     constructor(props) {
         super(props);
         this.state = {
@@ -44,25 +44,24 @@ class Cart extends Component {
     render() {
         const {cartItems, order} = this.props;
         // 這裡的 order 是 createOrder 動作完成後，更新之後的 order 狀態
-        return (
-            <div>
-
+        return ( 
+            <div className="cart">
                 {cartItems.length === 0
                 ?  
-                <div className="cart cart-header">Cart is empty</div>
+                <div className="cart__header">Cart is empty</div>
                 :
-                <div className="cart cart-header">You have {cartItems.length} in the cart</div>}
-                
+                <div className="cart__header">You have {cartItems.length} in the cart</div>}
 
-                {
+
+                { // order 存在的話才以 popup 顯示訂單內容，關掉的同時啟動 closeModal，再連到 orderActions.js 裡面的 clearOrder，將 order 改為 null，在這同時，popup 消失
                     order && 
-                    <Modal isOpen={true} onRequestClose={this.closeModal}>
+                    <Modal isOpen={true} onRequestClose={this.closeModal} className="order order__modal">
                         <Zoom>
                             <button className="close-modal" onClick={this.closeModal}>
                                 x
                             </button>
-                            <div className="order-details">
-                                <h3 className="success-message">Your order has been placed.</h3>
+                            <div className="order__details">
+                                <h3 className="order__success-message">Your order has been placed.</h3>
                                 <h2>Order - {order._id}</h2>
                                 <ul>
                                     <li key={order._id}>
@@ -101,74 +100,62 @@ class Cart extends Component {
                     </Modal>
                 }
 
-
-                <div className="cart">
                 <Fade right cascade>
-                    <ul className="cart-items">
+                    <ul className="cart__items">
                         {cartItems.map(item => (
-                            <li key={item._id}>
-                                <div>
-                                    <img src={item.image} alt={item.title}></img>
-                                </div>                                    
-                                <div>
-                                    <div>
+                            <li className="cart__item" key={item._id}>
+                                    <img className="cart__item-image" src={item.image} alt={item.title}></img>                           
+                                    <div className="cart__item-title">
                                         {item.title}
                                     </div>
-                                    <div className="right">
-                                        {formatCurrency(item.price)} x {item.count} {" "}
-                                        <button 
-                                        onClick={ () => this.props.removeFromCart(item)}>
-                                        Remove
-                                        </button>
-                                    </div>            
-                                </div>
+                                    <div className="cart__item-amount">{formatCurrency(item.price)} x {item.count} {" "}</div>
+                                    <button className="cart__item-remove-btn"
+                                    onClick={ () => this.props.removeFromCart(item)}>
+                                    <svg className="cart__item-remove-svg">
+                                        <use xlinkHref="images/sprite.svg#icon-circle-with-minus"></use>
+                                    </svg>
+                                    </button>
                             </li>
                         ))}
                     </ul>
                     </Fade>
-                </div>
 
                
                     {cartItems.length !== 0 && (
-                        <div>
-
-                            <div className="cart">
-                                <div className="total">
-                                    <div>
-                                        Total: {" "}
-                                        {formatCurrency(cartItems.reduce((a, c) => a + c.price * c.count, 0))}
-                                    </div>
-                                    <button 
-                                    className="button-primary"
-                                    onClick={ () => {this.setState({showCheckout: true})}}>
-                                        Proceed
-                                    </button>
+                        <div className="cart__about-to-proceed">
+                            <div className="cart__total">
+                                <div className="cart__amount">
+                                    Total: {" "}
+                                    {formatCurrency(cartItems.reduce((a, c) => a + c.price * c.count, 0))}
                                 </div>
+                                <button 
+                                className="cart__proceed-btn"
+                                onClick={ () => {this.setState({showCheckout: true})}}>
+                                    Proceed
+                                </button>
                             </div>
 
                             {this.state.showCheckout && (
                                 <Fade clear >
-                                <div className="cart">
-                                    <form onSubmit={this.createOrder}>                                   
-                                        <ul className="form-container">
-                                            <li>
-                                                <label>Email</label>
-                                                <input type="email" name="email" required onChange={this.handleInput}></input>
-                                            </li>
-                                            <li>
-                                                <label>Name</label>
-                                                <input type="text" name="name" required onChange={this.handleInput}></input>
-                                            </li>
-                                            <li>
-                                                <label>Address</label>
-                                                <input type="text" name="address" required onChange={this.handleInput}></input>
-                                            </li>
-                                            <li>
-                                                <button className="button-primary" type="submit">Checkout</button>
-                                            </li>
-                                        </ul>
-                                    </form>
-                                </div>
+                                        <form className="form__container" onSubmit={this.createOrder}>
+                                            <ul>
+                                                <li>
+                                                    <label className="form__label">Email</label>
+                                                    <input className="form__input" type="email" name="email" placeholder="email" required onChange={this.handleInput}></input>
+                                                </li>
+                                                <li>
+                                                    <label className="form__label">Name</label>
+                                                    <input className="form__input" type="text" name="name" placeholder="name" required onChange={this.handleInput}></input>
+                                                </li>
+                                                <li>
+                                                    <label className="form__label">Address</label>
+                                                    <input className="form__input" type="text" name="address" placeholder="address" required onChange={this.handleInput}></input>
+                                                </li>
+                                                <li>
+                                                    <button className="form__btn" type="submit">Checkout</button>
+                                                </li>
+                                            </ul>
+                                        </form>
                                 </Fade>
                             )}
 
