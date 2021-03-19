@@ -37,7 +37,7 @@ const Product = mongoose.model(
         availableSizes: [String]
     })
 )
-
+ 
 // 定義「從 database 裡面取得 list of products」的行為
 
 app.get("/api/products", async (req, res) => {
@@ -46,7 +46,7 @@ app.get("/api/products", async (req, res) => {
     res.send(products);
 });
 
-// 定義「把前端的資料丟進database」的行為，並且存起來
+// 定義「把資料丟進database」的行為（用 postman），並且存起來
 
 app.post("/api/products", async (req, res) => {
     const newProduct = new Product(req.body);
@@ -54,6 +54,8 @@ app.post("/api/products", async (req, res) => {
     res.send(savedProduct);
 });
 
+
+// 定義把資料刪掉的行為
 app.delete("/api/products/:id", async(req, res) => {
     const deletedProduct = await Product.findByIdAndDelete(req.params.id);
     res.send(deletedProduct);

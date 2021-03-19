@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import formatCurrency from '../util';
-import Fade from "react-reveal/Fade";
+import Fade from "react-reveal/Fade"; 
 import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom"
 import { connect } from 'react-redux';
@@ -20,6 +20,7 @@ class Products extends Component {
         this.props.fetchProducts();
     }
 
+    // a2. 從 a1. 那邊傳進來的參數作為更新 state 的值，預設的 product: null 變成 product: product
     openModal = (product) => {
         this.setState({ product });
     }
@@ -35,39 +36,40 @@ class Products extends Component {
                     {
                         !this.props.pProducts
                         ? 
-                        ( <div>Loading...</div>)
+                        (   <div className="loading">
+                                <p>Loading...</p>
+                            </div>
+                        )
                         :
                         <ul className="products">
-                        {this.props.pProducts.map((product) => { return (
-                            <li key={product._id}>
-                                <div className="product">
-                                    <a onClick={ () => this.openModal(product)}  href={"#" + product._id}>
-                                        <img src={product.image} alt={product.title}></img>
-                                        <p>
-                                            {product.title}
-                                        </p>
-                                    </a>
-                                    <div className="product-price">
-                                        <div>
-                                            {formatCurrency(product.price)}
+                            {this.props.pProducts.map((product) => { return (
+                                <li className="product" key={product._id}>
+                                         {/* a1. 設定當按下照片、產品名時，啟用 openModal 並將 product 傳入作為參數*/}
+                                        <a className="product__image" onClick={ () => this.openModal(product)}  href={"#" + product._id}>
+                                            <img src={product.image} alt={product.title}></img>
+                                        </a>
+                                        <a className="product__title" onClick={ () => this.openModal(product)}  href={"#" + product._id}>
+                                            <p>
+                                                {product.title}
+                                            </p>
+                                        </a>
+                                        <div className="product__price">
+                                            <div>
+                                                {formatCurrency(product.price)}
+                                            </div>
+                                            <button 
+                                            className="product__add-btn product__add-btn--1"
+                                            onClick={() => this.props.addToCart(product)}>
+                                                Add
+                                            </button>
                                         </div>
-                                        <button 
-                                        className="button-primary"
-                                        onClick={() => this.props.addToCart(product)}>
-                                            Add
-                                        </button>
-                                    </div>
-                                </div>
-                            </li>
-                        )})}
-                    </ul>
-                    }
-
-
-
-                    
+                                </li>
+                            )})}
+                        </ul>
+                    }                    
                 </Fade>
-                {
+
+                {   // a3. 若 this.state.product 存在（product 的值不是 null，而是 product），才會顯示 <Modal/>
                     this.state.product && (
                         <Modal isOpen={true} onRequestClose={this.closeModal}>
                             <Zoom>
@@ -121,3 +123,12 @@ export default connect(
                         {fetchProducts, addToCart}
                         )
                         (Products)
+
+// 此處，使用 connect 將 ProductReducers.js 裡的 state 與 productActions 裡的 action 匯入
+// state 的部分：以 pProducts 命名「state.products.filteredItems」，「state.products.filteredItems」
+// 中的「state.products」來自於 store.js。「.filteredItems」來自於 ProductReducers.js。
+
+
+// 關於 addToCart
+// addToCart 有兩個，一個是在頁面的 add，一個是在點擊商品後出現的 popup 裡面的 add。
+// 

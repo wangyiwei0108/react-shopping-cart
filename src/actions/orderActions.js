@@ -17,7 +17,7 @@ export const createOrder = (order) => (dispatch) => {
     .then((data) => {
         dispatch({ type: CREATE_ORDER, payload: data });
         localStorage.clear("cartItems");
-        dispatch({ type: CLEAR_CART });
+        dispatch({ type: CLEAR_CART }); // ???
     });
 };
 
@@ -31,4 +31,4 @@ export const fetchOrders = () => (dispatch) => {
         .then((data) => {
             dispatch({ type: FETCH_ORDERS, payload: data });
         });
-}
+} 

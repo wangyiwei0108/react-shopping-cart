@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { fetchOrders } from '../actions/orderActions';
 import formatCurrency from '../util';
-
+ 
 class Orders extends Component {
     
     componentDidMount() {

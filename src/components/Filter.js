@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { filterProducts, sortProducts } from "../actions/productActions";
-
+ 
 class Filter extends Component {
     render() {
         return (
-            ! this.props.filteredProducts?
-            (<div>Loading...</div>) 
+            !this.props.filteredProducts?
+            (<div></div>) 
             :
             (
             <div className="filter">
-                <div className="filer-result">{this.props.filteredProducts.length} Products</div>
-                <div className="filter-sort">
+                <div className="filer-result"> {/*篩選後總共有 ？ 個 product*/} {this.props.filteredProducts.length} Products</div>
+                <div className="filter-sort"> {/*排序（總數不變）*/}
                     Order {" "}
+                    {/* 先看 onChange 的部分，點擊選擇時，會發生事件（e）並作為 sortProducts 這個 action 的參數。
+                     接著，將「this.props.filteredProducts」帶入，「this.props.filteredProducts」是已經經過篩選後的 products，並以此來排序。
+                     所以並不是將「this.props.products」帶入！另一方面，「e.target.value」同樣也帶入。這兩個參數將被傳入 productActions.js 去執行。 */}
                     <select value={this.props.sort} onChange={(e) => this.props.sortProducts(this.props.filteredProducts, e.target.value)}>
-                        <option valie="latest">Latest</option>
+                        <option value="latest">Latest</option>
                         <option value="lowest">Lowest</option>
                         <option value="highest">Highest</option>
                     </select>
                 </div>
-                <div className="filter-size">
+                <div className="filter-size"> {/*篩選（總數會變）*/}
                     Filter {" "}
                     <select value={this.props.size} onChange={(e) => this.props.filterProducts(this.props.products, e.target.value)}>
                         <option value="">All</option>
@@ -43,9 +46,9 @@ class Filter extends Component {
 
 export default connect (
     (state) => ({
-    size: state.products.size,
     sort: state.products.sort,
     filteredProducts: state.products.filteredItems,
+    size: state.products.size,
     products: state.products.items,
     }),
     {

@@ -1,7 +1,7 @@
 import { FETCH_PRODUCTS, ORDER_PRODUCTS_BY_PRICE, FILTER_PRODUCTS_BY_SIZE } from "../types";
 
 export const fetchProducts = () => async (dispatch) => {
-    const res = await fetch("/api/products");
+    const res = await fetch("/api/products"); // ?????
     const data = await res.json();
     console.log(data);
     dispatch({
@@ -10,18 +10,11 @@ export const fetchProducts = () => async (dispatch) => {
     });
 };
 
-export const filterProducts = (products, size) => (dispatch) => {
-    dispatch({
-        type: FILTER_PRODUCTS_BY_SIZE,
-        payload: {
-            size: size,
-            items:
-                size === ""
-                ? products
-                : products.filter((product) => product.availableSizes.indexOf(size) >= 0),
-        },
-    })
-} 
+// sortProducts 這個 action 有 2 個參數，filteredProducts 以及 sort
+// 是以 sort 的款式來改變 個參數，filteredProducts 裡頭的排序
+// 最後，將這個 action 的基本資料打包（dispatch）傳去給 reducer
+// 資料內容為： 1. action 的 type 名稱（ORDER_PRODUCTS_BY_PRICE）
+//            2. action 的資料內容（payload），分別有 sort: sort 以及 items: sortedProducts
 
 export const sortProducts = (filteredProducts, sort) => (dispatch) => {
     const sortedProducts = filteredProducts.slice();
@@ -45,5 +38,18 @@ export const sortProducts = (filteredProducts, sort) => (dispatch) => {
             items: sortedProducts
         }
     })
-
 }
+
+export const filterProducts = (products, size) => (dispatch) => {
+    dispatch({
+        type: FILTER_PRODUCTS_BY_SIZE,
+        payload: {
+            size: size,
+            items:
+                size === ""
+                ? products
+                : products.filter((product) => product.availableSizes.indexOf(size) >= 0),
+        },
+    })
+} 
+

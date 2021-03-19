@@ -3,8 +3,9 @@ import { Provider } from 'react-redux';
 // import data from './data.json';
 import store from './store';
 import { BrowserRouter, Route, Link } from "react-router-dom";
-import HomeScreen from './screens/HomeScreen';
+import ProductsScreen from './screens/ProductsScreen';
 import AdminScreen from './screens/AdminScreen';
+import HomeScreen from './screens/HomeScreen';
 
 class App extends React.Component {
   
@@ -80,19 +81,23 @@ class App extends React.Component {
 // };
 
   render () {
-    return (
+    return (  
       <Provider store={store}>
         <BrowserRouter>
-          <div className="grid-container">    
-            <header>
-              <Link to="/">React Shopping Cart</Link>
-              <Link to="/admin">Admin</Link>
+          <div className="container">
+            <header className="header">
+              <Link className="header__home" to="/">Home</Link>
+              <Link className="header__products" to="/products">Products</Link>
+              <Link className="header__admin" to="/admin">Admin</Link>
             </header>
-            <main>
-              <Route path="/admin" component={AdminScreen} />
-              <Route path="/" component={HomeScreen} exact />
-            </main>
-            <footer>
+            <body>
+              <main className="main">
+                <Route path="/" component={HomeScreen} exact/>
+                <Route path="/admin" component={AdminScreen} />
+                <Route path="/products" component={ProductsScreen} />
+              </main>
+            </body>
+            <footer className="footer">
               All Right is Reserved.
             </footer>
           </div>
