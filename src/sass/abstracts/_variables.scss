@@ -1,6 +1,6 @@
 // color
 
-$color-primary-1: #7B91A3;
+$color-primary-1: #e4e8eb;
 $color-primary-2: #537087;
 $color-primary-3: #355670;
 $color-primary-4: #21445C;
@@ -14,20 +14,21 @@ $color-secondary-5: #610F1C;
 
 $color-tertiary-1: #F0C74A;
 $color-tertiary-2: #FFDC71;
+$color-tertiary-3: #efc034;
 
 
 $color-grey-light-1: #faf9f9;
-$color-grey-light-2: #f4f2f2;
+$color-grey-light-2: #f2f2f2;
 $color-grey-light-3:#f0eeee;
+$color-grey-light-3-1: #dfdfdf;
 $color-grey-light-4: #ccc;
+$color-grey-light-5: #bababa;
 
 $color-grey-dark-1:#333;
 $color-grey-dark-2: #777;
 $color-grey-dark-3: #999;
 
-// grid
+// font
 
-$grid-width: 114rem;
-$gutter-vertical-small: 6rem;
-$gutter-vertical: 5rem;
-$gutter-horizontal: 5rem;
+$default-font: 'Roboto', sans-serif;
+$default-font-size: 1.6rem;

@@ -11,9 +11,9 @@ class Orders extends Component {
 
     render() {
         const { orders } = this.props;
-        return  !orders ? <div>Orders</div>:
+        return  !orders ? <p className="loading">Loading...</p>:
             <div className="orders">
-                <h2>Orders</h2>
+                <h3 className="orders__heading">Orders</h3>
                 <table>
                     <thead>
                         <tr>

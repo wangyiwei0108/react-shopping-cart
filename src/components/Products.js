@@ -6,7 +6,7 @@ import Zoom from "react-reveal/Zoom"
 import { connect } from 'react-redux';
 import { fetchProducts } from '../actions/productActions';
 import { addToCart } from '../actions/cartActions';
-
+ 
 class Products extends Component {
 
     constructor(props) {
@@ -58,7 +58,7 @@ class Products extends Component {
                                                 {formatCurrency(product.price)}
                                             </div>
                                             <button 
-                                            className="product__add-btn product__add-btn--1"
+                                            className="btn-1"
                                             onClick={() => this.props.addToCart(product)}>
                                                 Add
                                             </button>
@@ -71,41 +71,43 @@ class Products extends Component {
 
                 {   // a3. 若 this.state.product 存在（product 的值不是 null，而是 product），才會顯示 <Modal/>
                     this.state.product && (
-                        <Modal isOpen={true} onRequestClose={this.closeModal}>
+                        <Modal className="modal__modal-size" isOpen={true} onRequestClose={this.closeModal}>
                             <Zoom>
-                                <button className="close-modal" onClick={this.closeModal}>
-                                    x
+                                <div className="modal__container">
+                                <button className="close-btn " onClick={this.closeModal}>
+                                    <svg className="close-svg">
+                                        <use xlinkHref="images/sprite.svg#icon-circle-with-cross"></use>
+                                    </svg> 
                                 </button>
-                                <div className="product-details">
-                                    <img src={this.state.product.image} alt={this.state.product.title}></img>
-                                    <div className="product-details-description">
-                                        <p>
-                                            <strong>{this.state.product.title}</strong>
-                                        </p>
-                                        <p>
+                                <div className="modal__info">
+                                    <img className="modal__img" src={this.state.product.image} alt={this.state.product.title}></img>
+                                    <div className="modal__detail">
+                                        <div className="modal__title">
+                                            <h3>{this.state.product.title}</h3>
+                                        </div>
+                                        <div className="modal__description">
                                             {this.state.product.description}
-                                        </p>
-                                        <p>
-                                            Available Sizes:{" "}
+                                        </div>
+                                        <div className="modal__available-size">
+                                            <h4>Sizes:{" "}</h4>
                                             {this.state.product.availableSizes.map((size) => 
                                             <span>
                                                 {" "}
-                                                <button className="button">{size}</button>
+                                                <span>{size}{" "}</span>
                                             </span>)}
-                                        </p>
-                                        <div className="product-price">
-                                            <div>
-                                                  {formatCurrency(this.state.product.price)}
-                                                <button 
-                                                    className="button-primary" 
-                                                    onClick= { () => {
-                                                        this.props.addToCart(this.state.product);
-                                                        this.closeModal();}}>
-                                                    Add
-                                                </button>
-                                            </div>
+                                        </div>
+                                        <div className="modal__price">
+                                            <h4>{formatCurrency(this.state.product.price)}</h4>
+                                            <button 
+                                                className="btn-1" 
+                                                onClick= { () => {
+                                                    this.props.addToCart(this.state.product);
+                                                    this.closeModal();}}>
+                                                Add
+                                            </button>
                                         </div>
                                     </div>
+                                </div>
                                 </div>
                             </Zoom>
                         </Modal>

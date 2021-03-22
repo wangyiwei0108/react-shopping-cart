@@ -86,9 +86,9 @@ class App extends React.Component {
         <BrowserRouter>
           <div className="container">
             <header className="header">
-              <Link className="header__home" to="/">Home</Link>
-              <Link className="header__products" to="/products">Products</Link>
-              <Link className="header__admin" to="/admin">Admin</Link>
+              <Link className="header__home" to="/"><h2>Store</h2></Link>
+              <Link className="header__products" to="/products"><h2>Product</h2></Link>
+              <Link className="header__admin" to="/admin"><h2>Admin</h2></Link>
             </header>
             <body>
               <main className="main">
