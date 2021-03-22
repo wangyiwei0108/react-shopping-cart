@@ -1,5 +1,5 @@
-import { FETCH_PRODUCTS, ORDER_PRODUCTS_BY_PRICE, FILTER_PRODUCTS_BY_SIZE } from "../types";
-
+import { FETCH_PRODUCTS, ORDER_PRODUCTS_BY_PRICE, FILTER_PRODUCTS_BY_SIZE, SEARCH_PRODUCTS_BY_NAME } from "../types";
+ 
 export const fetchProducts = () => async (dispatch) => {
     const res = await fetch("/api/products"); // ?????
     const data = await res.json();
@@ -9,6 +9,18 @@ export const fetchProducts = () => async (dispatch) => {
         payload: data
     });
 };
+
+export const searchProducts = (searchproducts, name) => (dispatch) => {
+    dispatch ({
+        type: SEARCH_PRODUCTS_BY_NAME,
+        payload: {
+            name: name,
+            items: searchproducts.filter(searchproduct => {
+                return searchproduct.title.toLowerCase().includes(name.toLowerCase());
+            })
+        }
+    })
+} 
 
 // sortProducts 這個 action 有 2 個參數，filteredProducts 以及 sort
 // 是以 sort 的款式來改變 個參數，filteredProducts 裡頭的排序

@@ -1,0 +1,49 @@
+{
+    "stores": [
+      {
+        "_id": "store1",
+        "name": "PLISSÉ MIYAKE / AOYAMA",
+        "geometry": [35.664833, 139.713389],
+        "address": "3-18-14 Minamiaoyama, Minato-ku, Tokyo",
+        "description": "Space design by Tokujin Yoshioka. There is a pleating machine installed to show customers how pleating is applied on a garment.",
+        "tel": "+81-3-5411-5007",
+        "openingHours": "11:00-20:00"
+      },
+      {
+        "_id": "store2",
+        "name": "ISSEY MIYAKE GINZA",
+        "geometry": [35.672056, 139.765056],
+        "address": "4-4-5 Central Bldg, Ginza, Chuo-ku, Tokyo",
+        "description": "A store carrying multiple brands. The two-story store has a relaxed atmosphere that. The minimalist space design with a neutral white base color was created by Taku Satoh.",
+        "tel": "+81-3-3566-5225",
+        "openingHours": "11:00-20:00"
+      },
+      {
+        "_id": "store3",
+        "name": "ISSEY MIYAKE SHIBUYA",
+        "geometry": [35.662315, 139.698954],
+        "address": "15-1 Udagawa-cho, Shibuya-ku, Tokyo",
+        "description": "The store embodies the concept of “making people’s daily life comfortable with things that have never been seen before”. The space was designed by Tokujin Yoshioka.",
+        "tel": "+81-3-5422-3540",
+        "openingHours": "11:00-20:00"
+      },
+      {
+        "_id": "store4",
+        "name": "PLISSÉ MIYAKE / DAYAMA",
+        "geometry": [35.648690, 139.700879],
+        "address": "T2 Bldg., 19-8 Sarugakucho, Shibuya-ku, Tokyo",
+        "description": "A trapezoid-shaped concrete building with two floors and wide, designed by Naoto Fukasawa creates an impression that the clothes are floating.",
+        "tel": "+81-3-6277-5085",
+        "openingHours": "11:00-20:00"
+      },
+      {
+        "_id": "store5",
+        "name": "ISSEY MIYAKE MARUNOUCHI",
+        "geometry": [35.681890, 139.762392],
+        "address": "Yusen Bldg, Marunouchi, Chiyoda-ku, Tokyo",
+        "description": "Japanese traditional Machiya and the spirit of making things are harmonized together in the space designed by Naoto Fukasawa.",
+        "tel": "+81-3-5221-9900",
+        "openingHours": "11:00-20:00"
+      }
+    ]
+  }

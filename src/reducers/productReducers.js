@@ -1,5 +1,5 @@
-import { FETCH_PRODUCTS, ORDER_PRODUCTS_BY_PRICE, FILTER_PRODUCTS_BY_SIZE } from "../types";
- 
+import { FETCH_PRODUCTS, ORDER_PRODUCTS_BY_PRICE, FILTER_PRODUCTS_BY_SIZE, SEARCH_PRODUCTS_BY_NAME } from "../types";
+  
 export const productsReducer = (state = {}, action) => {
     switch (action.type) {
         
@@ -9,6 +9,13 @@ export const productsReducer = (state = {}, action) => {
                 // 而 filteredItems 是 items 的 copy，用來給下面的 price 做 state 的更新（項目排序改變）
                 items: action.payload, 
                 filteredItems: action.payload,
+            }
+
+        case SEARCH_PRODUCTS_BY_NAME:
+            return {
+                ...state,
+                name: action.payload.name,
+                filteredItems: action.payload.items,
             }
 
         case ORDER_PRODUCTS_BY_PRICE:

@@ -48,17 +48,19 @@ class Cart extends Component {
             <div className="cart">
                 {cartItems.length === 0
                 ?  
-                <div className="cart__header">Cart is empty</div>
+                <div className="cart__header"><h4>Cart is empty</h4></div>
                 :
-                <div className="cart__header">You have {cartItems.length} in the cart</div>}
+                <div className="cart__header"><h4>You have {cartItems.length} in the cart</h4></div>}
 
 
                 { // order 存在的話才以 popup 顯示訂單內容，關掉的同時啟動 closeModal，再連到 orderActions.js 裡面的 clearOrder，將 order 改為 null，在這同時，popup 消失
                     order && 
                     <Modal isOpen={true} onRequestClose={this.closeModal} className="order order__modal">
                         <Zoom>
-                            <button className="close-modal" onClick={this.closeModal}>
-                                x
+                            <button className="close-btn" onClick={this.closeModal}>
+                                <svg className="close-svg">
+                                    <use xlinkHref="images/sprite.svg#icon-circle-with-cross"></use>
+                                </svg>
                             </button>
                             <div className="order__details">
                                 <h3 className="order__success-message">Your order has been placed.</h3>
@@ -125,11 +127,12 @@ class Cart extends Component {
                         <div className="cart__about-to-proceed">
                             <div className="cart__total">
                                 <div className="cart__amount">
-                                    Total: {" "}
+                                    <h4>Total: {" "}
                                     {formatCurrency(cartItems.reduce((a, c) => a + c.price * c.count, 0))}
+                                    </h4>
                                 </div>
                                 <button 
-                                className="cart__proceed-btn"
+                                className="btn-2"
                                 onClick={ () => {this.setState({showCheckout: true})}}>
                                     Proceed
                                 </button>
@@ -137,8 +140,8 @@ class Cart extends Component {
 
                             {this.state.showCheckout && (
                                 <Fade clear >
-                                        <form className="form__container" onSubmit={this.createOrder}>
-                                            <ul>
+                                        <form onSubmit={this.createOrder}>
+                                            <ul className="form__container">
                                                 <li>
                                                     <label className="form__label">Email</label>
                                                     <input className="form__input" type="email" name="email" placeholder="email" required onChange={this.handleInput}></input>
@@ -151,9 +154,7 @@ class Cart extends Component {
                                                     <label className="form__label">Address</label>
                                                     <input className="form__input" type="text" name="address" placeholder="address" required onChange={this.handleInput}></input>
                                                 </li>
-                                                <li>
-                                                    <button className="form__btn" type="submit">Checkout</button>
-                                                </li>
+                                                <button className="btn-2" type="submit">Checkout</button>
                                             </ul>
                                         </form>
                                 </Fade>
