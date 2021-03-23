@@ -8,7 +8,7 @@ export const fetchProducts = () => async (dispatch) => {
         type: FETCH_PRODUCTS,
         payload: data
     });
-};
+}; 
 
 export const searchProducts = (searchproducts, name) => (dispatch) => {
     dispatch ({

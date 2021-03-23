@@ -86,9 +86,9 @@ class App extends React.Component {
         <BrowserRouter>
           <div className="container">
             <header className="header">
-              <Link className="header__home" to="/"><h2>Store</h2></Link>
-              <Link className="header__products" to="/products"><h2>Product</h2></Link>
-              <Link className="header__admin" to="/admin"><h2>Admin</h2></Link>
+              <Link className="header__home" to="/">Store</Link>
+              <Link className="header__products" to="/products">Product</Link>
+              <Link className="header__admin" to="/admin">Admin</Link>
             </header>
             <body>
               <main className="main">
@@ -98,7 +98,7 @@ class App extends React.Component {
               </main>
             </body>
             <footer className="footer">
-              All Right is Reserved.
+              Sources of text and images are from <a href="https://www.isseymiyake.com/" target="_blank" rel="noreferrer">ISSEY MIYAKE</a>
             </footer>
           </div>
         </BrowserRouter>

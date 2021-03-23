@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import formatCurrency from '../util';
 import Fade from "react-reveal/Fade"; 
 import Modal from "react-modal";
-import Zoom from "react-reveal/Zoom"
+import Zoom from "react-reveal/Zoom";
+import Magnifier from "react-magnifier";
 import { connect } from 'react-redux';
 import { fetchProducts } from '../actions/productActions';
 import { addToCart } from '../actions/cartActions';
@@ -12,7 +13,9 @@ class Products extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            product: null
+            product: null,
+            selectedSize: "",
+            selectedQuantity: "",
         }
     }
 
@@ -27,6 +30,27 @@ class Products extends Component {
 
     closeModal = () => {
         this.setState({ product: null });
+    }
+
+    sizeInput = (e) => {
+        this.setState({selectedSize: e.target.value});
+    }
+
+    quantityInput = (e) => {
+        this.setState({selectedQuantity: e.target.value});
+    }
+
+    createCartItem = (e) => {
+        e.preventDefault();
+
+        const info = {
+            size: this.state.selectedSize,
+            quantity: this.state.selectedQuantity
+        }
+
+        const cartItems = Object.assign(info, this.state.product)
+
+        this.props.addToCart(cartItems);
     }
 
     render() {
@@ -49,24 +73,19 @@ class Products extends Component {
                                             <img src={product.image} alt={product.title}></img>
                                         </a>
                                         <a className="product__title" onClick={ () => this.openModal(product)}  href={"#" + product._id}>
-                                            <p>
+                                            <h4>
                                                 {product.title}
-                                            </p>
+                                            </h4>
                                         </a>
                                         <div className="product__price">
                                             <div>
                                                 {formatCurrency(product.price)}
                                             </div>
-                                            <button 
-                                            className="btn-1"
-                                            onClick={() => this.props.addToCart(product)}>
-                                                Add
-                                            </button>
                                         </div>
                                 </li>
                             )})}
                         </ul>
-                    }                    
+                    }
                 </Fade>
 
                 {   // a3. 若 this.state.product 存在（product 的值不是 null，而是 product），才會顯示 <Modal/>
@@ -80,32 +99,40 @@ class Products extends Component {
                                     </svg> 
                                 </button>
                                 <div className="modal__info">
-                                    <img className="modal__img" src={this.state.product.image} alt={this.state.product.title}></img>
+                                    
+                                    <Magnifier src={this.state.product.image} className="modal__img" width={400} mgWidth={180} mgHeight={180} mgShape={'square'} alt={this.state.product.title}/>
+
                                     <div className="modal__detail">
                                         <div className="modal__title">
-                                            <h3>{this.state.product.title}</h3>
+                                            <h2>{this.state.product.title}</h2>
                                         </div>
                                         <div className="modal__description">
                                             {this.state.product.description}
                                         </div>
-                                        <div className="modal__available-size">
-                                            <h4>Sizes:{" "}</h4>
-                                            {this.state.product.availableSizes.map((size) => 
-                                            <span>
-                                                {" "}
-                                                <span>{size}{" "}</span>
-                                            </span>)}
-                                        </div>
-                                        <div className="modal__price">
-                                            <h4>{formatCurrency(this.state.product.price)}</h4>
-                                            <button 
-                                                className="btn-1" 
-                                                onClick= { () => {
-                                                    this.props.addToCart(this.state.product);
-                                                    this.closeModal();}}>
-                                                Add
-                                            </button>
-                                        </div>
+
+                                            <form onSubmit={this.createCartItem}>
+                                                <div className="modal__sq-form">
+                                                    <div className="modal__sq-size">
+                                                        <h4>Size{" "}</h4>
+                                                            {this.state.product.availableSizes.map((size) => 
+                                                            <div className="modal__radio">
+                                                                <input required onClick={this.sizeInput} type="radio" name="selectedSize" id={size} value={size}></input>
+                                                                <label> {size} </label>
+                                                            </div> )}
+                                                    </div>
+                                                    <div className="modal__sq-quantity">
+                                                        <h4>Quantity{" "}</h4>
+                                                            <select required onChange={this.quantityInput}>
+                                                                <option value="">0</option>
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                            </select>
+                                                    </div>
+                                                    <button className="modal__sq-btn btn-1" type="submit">Add to cart</button>
+                                                </div>
+                                            </form>
+
                                     </div>
                                 </div>
                                 </div>
