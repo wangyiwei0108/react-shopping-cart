@@ -22,6 +22,8 @@
     align-content: center;
     justify-content: flex-start;
 
+    font-size: 2rem;
+
     padding: 2rem;
 
     a {
@@ -48,6 +50,12 @@
     text-align: center;
     color: $color-grey-light-1;
     padding: 2rem;
+
+    a {
+        color: $color-grey-light-1;
+        text-transform: uppercase;
+        text-decoration: none;
+      }
 }
 
 
@@ -115,8 +123,8 @@
 
     &__item {
         display: grid;
-        grid-template-columns: min-content 1fr 1fr;
-        justify-items: flex-end;
+        grid-template-columns: min-content min-content 1fr 1fr min-content;
+        justify-items: center;
         align-items: flex-start;
     
         padding: 1rem;
@@ -139,19 +147,26 @@
     
     &__item-title {
         grid-row: 1 / 2;
-        grid-column: 2 / 4;
+        grid-column: 2 / 6;
     }
-    
-    &__item-amount {
+
+    &__item-size {
         grid-row: 2 / 3;
         grid-column: 2 / 3;
         align-self: flex-end;
     }
     
+    &__item-amount {
+        grid-row: 2 / 3;
+        grid-column: 3 / 5;
+        align-self: flex-end;
+    }
+    
     &__item-remove-btn {
         grid-row: 2 / 3;
-        grid-column: 3 / 4;
+        grid-column: 5 / 6;
         align-self: flex-end;
+        margin-bottom: -0.3rem;
 
         border: none;
         background-color: transparent;
@@ -166,15 +181,6 @@
         width: 2rem;
         height: 2rem;
         fill: $color-primary-5;
-        transition: transform 0.1s;
-
-        &:hover {
-            transform: translateY(-0.1rem);
-        }
-
-        &:active {
-            transform: translateY(0);
-        }
     }
 
     &__about-to-proceed {
@@ -183,15 +189,27 @@
 
     &__total {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+        align-items: flex-end;
     
-        padding: 1rem;
+        padding: 1rem 0;
     
-        margin-top: 7rem;
+        margin-top: 3rem;
         margin-bottom: 4rem;
-    
-        padding: 1rem;
+
+    }
+
+    &__amount {
+        padding: 2rem;
+        align-self: stretch;
+        margin-bottom: 2rem;
+        background-color: $color-primary-1;
+        border-radius: 2px;
+
+    }
+
+    &__number {
+        margin-top: 2rem;
     }
 }
 
@@ -213,7 +231,6 @@
 
         button {
             justify-self: flex-end;
-            margin-right: 1rem;
         }
         
     }
@@ -405,17 +422,16 @@
 ////// button
 
 @mixin btn-default {
-    background-color: $color-grey-light-1;
     color: $color-grey-dark-1;
-    border: 2px solid $color-grey-light-5;
     border-radius: 3px;
     text-decoration: none;
     transition-duration: all 0.4s;
+    font-weight: 500;
     cursor: pointer;
     outline: none;
+    transition: all ease;
 
         &:hover {
-            background-color: $color-grey-light-2;
             transform: translateY(-0.15rem);
         }
 
@@ -426,19 +442,12 @@
 
 .btn-1 {
     @include btn-default;
+
     padding: 0.5rem 3vw;
-}
+    border: 2px solid $color-primary-5;
+    background-color: $color-primary-5;
+    color:  $color-grey-light-1;
 
-.btn-2 {
-    @include btn-default;
-
-    background-color: $color-tertiary-2;
-    border: 2px solid $color-tertiary-3;
-    padding: 0.5rem 2vw;
-
-        &:hover {
-            background-color: $color-tertiary-2;
-        }
 }
 
 //////////////////////
@@ -453,6 +462,10 @@
   z-index: 1000;
   border: none;
 
+  &:hover {
+      cursor: pointer;
+  }
+
   &:focus {
       outline: none;
   }
@@ -466,15 +479,6 @@
     width: 2rem;
     height: 2rem;
     fill: $color-primary-5;
-    transition: transform 0.1s;
-
-    &:hover {
-        transform: translateY(-0.1rem);
-    }
-
-    &:active {
-        transform: translateY(0);
-    }
 }
 
 //////////////////////
@@ -643,7 +647,7 @@ margin: -1.6rem;
         grid-row: 2 / 3;
         grid-column: 1 / 2;
 
-        width: 28vw;
+        width: 26vw;
     }
 
     &__detail {
@@ -657,24 +661,63 @@ margin: -1.6rem;
     }
 
     &__title {
-
+        margin-bottom: 1rem;
     }
 
     &__description {
-        padding: 3rem 0;
+        margin-bottom: 2rem;
+        padding-bottom: 4rem;
     }
 
-    &__available-size {
-        display: flex;
+    &__sq-form {
+        display: grid;
+        grid-template-columns: max-content max-content 1fr;
+        grid-column-gap: 3.5rem;
+        justify-items: flex-start;
+        align-items: flex-start;
 
-        * {
-            margin-right: 1rem;
+        padding-top: 2rem;
+
+        border-top: 0.2rem solid $color-primary-5;
+
+        h4 {
+            margin-bottom: 1rem;
         }
     }
 
-    &__price {
+    &__sq-size {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    &__sq-btn {
+        justify-self: flex-end;
+    }
+
+    &__radio {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+        margin-left: -0.3rem;
+
+        input {
+            width: 1.8rem;
+            height: 1.8rem;
+            margin-right: 0.5rem;
+        }
+    }
+
+    &__sq-quantity {
+
+        :focus {
+            outline: none;
+        }
+
+        & select {
+            padding: 0 0.5rem;
+        font-family: inherit;
+        color: $color-grey-dark-1;
+        }
     }
 }

@@ -34,7 +34,9 @@ class Cart extends Component {
             cartItems: this.props.cartItems,
             total: this.props.cartItems.reduce((a, c) => a + c.price * c.count, 0)
         };
+
         this.props.createOrder(oorder);
+
         // 這個 createOrder 跟上面的 createOrder = (e) => ... 是不一樣的哦！
         // 這個 createOrder 是從 action 叫進來的
     }
@@ -48,9 +50,9 @@ class Cart extends Component {
             <div className="cart">
                 {cartItems.length === 0
                 ?  
-                <div className="cart__header"><h4>Cart is empty</h4></div>
+                <div className="cart__header"><h3>Cart is empty</h3></div>
                 :
-                <div className="cart__header"><h4>You have {cartItems.length} in the cart</h4></div>}
+                <div className="cart__header"><h3>You have {cartItems.length} in the cart</h3></div>}
 
 
                 { // order 存在的話才以 popup 顯示訂單內容，關掉的同時啟動 closeModal，再連到 orderActions.js 裡面的 clearOrder，將 order 改為 null，在這同時，popup 消失
@@ -85,13 +87,13 @@ class Cart extends Component {
                                     <li key={order._id}>
                                         <div>Total:</div>
                                         <div>{formatCurrency(order.total)}</div>
-                                    </li>
+                                    </li> 
                                     <li key={order._id}>
                                         <div>Cart Items:</div>
                                         <div>
                                             {order.cartItems.map((x) =>(
                                                 <div>
-                                                    {x.count}{" x "}{x.title}
+                                                    {x.title} {" x "} {x.size} {" x "} {x.count}
                                                 </div>
                                             ))}
                                         </div>
@@ -105,11 +107,12 @@ class Cart extends Component {
                 <Fade right cascade>
                     <ul className="cart__items">
                         {cartItems.map(item => (
-                            <li className="cart__item" key={item._id}>
-                                    <img className="cart__item-image" src={item.image} alt={item.title}></img>                           
+                            <li className="cart__item" key={item._size}>
+                                    <img className="cart__item-image" src={item.image} alt={item.title}></img>
                                     <div className="cart__item-title">
                                         {item.title}
                                     </div>
+                                    <div className="cart__item-size"> {item.size} </div>
                                     <div className="cart__item-amount">{formatCurrency(item.price)} x {item.count} {" "}</div>
                                     <button className="cart__item-remove-btn"
                                     onClick={ () => this.props.removeFromCart(item)}>
@@ -127,12 +130,11 @@ class Cart extends Component {
                         <div className="cart__about-to-proceed">
                             <div className="cart__total">
                                 <div className="cart__amount">
-                                    <h4>Total: {" "}
-                                    {formatCurrency(cartItems.reduce((a, c) => a + c.price * c.count, 0))}
-                                    </h4>
+                                    <h5>Total {" "}</h5>
+                                    <h2 className="cart__number">{formatCurrency(cartItems.reduce((a, c) => a + c.price * c.count, 0))}</h2>
                                 </div>
                                 <button 
-                                className="btn-2"
+                                className="cart__proceed-btn btn-1"
                                 onClick={ () => {this.setState({showCheckout: true})}}>
                                     Proceed
                                 </button>
@@ -143,18 +145,18 @@ class Cart extends Component {
                                         <form onSubmit={this.createOrder}>
                                             <ul className="form__container">
                                                 <li>
-                                                    <label className="form__label">Email</label>
+                                                    <label className="form__label"><h5>Email</h5></label>
                                                     <input className="form__input" type="email" name="email" placeholder="email" required onChange={this.handleInput}></input>
                                                 </li>
                                                 <li>
-                                                    <label className="form__label">Name</label>
+                                                    <label className="form__label"><h5>Name</h5></label>
                                                     <input className="form__input" type="text" name="name" placeholder="name" required onChange={this.handleInput}></input>
                                                 </li>
                                                 <li>
-                                                    <label className="form__label">Address</label>
+                                                    <label className="form__label"><h5>Address</h5></label>
                                                     <input className="form__input" type="text" name="address" placeholder="address" required onChange={this.handleInput}></input>
                                                 </li>
-                                                <button className="btn-2" type="submit">Checkout</button>
+                                                <button className="btn-1" type="submit">Checkout</button>
                                             </ul>
                                         </form>
                                 </Fade>

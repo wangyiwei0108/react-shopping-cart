@@ -77,6 +77,7 @@ const Order = mongoose.model("order", new mongoose.Schema({
             title: String,
             price: Number,
             count: Number,
+            size: String,
         },
     ],
 },

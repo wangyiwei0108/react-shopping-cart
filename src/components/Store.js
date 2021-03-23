@@ -16,7 +16,7 @@ export default class Store extends Component {
                     </li>
                 ))}
                 <li>
-                    <Link to="/products"><button className="store__online-btn btn-1"><h4 className="store__name">ONLINE STORE</h4></button></Link>
+                    <Link to="/products"><button className="store__online-btn btn-1"><p className="store__name">Online Store</p></button></Link>
                 </li>
             </ul>
         )
