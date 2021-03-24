@@ -1,0 +1,18 @@
+@mixin respond($breakpoint) {
+
+    @if $breakpoint == tab-smallest {
+        @media only screen and (max-width: 34.375em) { @content };    //550px
+    }
+    @if $breakpoint == tab-small {
+        @media only screen and (max-width: 53.125em) { @content };    //850px
+    }
+    @if $breakpoint == tab-medium {
+        @media only screen and (max-width: 62.5em) { @content };     //1000px
+    }
+    @if $breakpoint == tab-large {
+        @media only screen and (max-width: 75em) { @content };    //1200px
+    }
+    @if $breakpoint == tab-huge {
+        @media only screen and (min-width: 112.5em) { @content };    //1800
+    }
+}

@@ -17,7 +17,7 @@ class Filter extends Component {
                     <svg className="filter__search--svg">
                         <use xlinkHref="images/sprite.svg#icon-magnifying-glass"></use>
                     </svg>
-                    <input className="filter__form filter__form--input" value={this.props.name} type="search" placeholder="Search product" onChange={(e) => this.props.searchProducts(this.props.products, e.target.value)}>
+                    <input className="filter__form filter__form--input" value={this.props.name} type="search" placeholder="Search" onChange={(e) => this.props.searchProducts(this.props.products, e.target.value)}>
                     </input> 
                 </div>
                 

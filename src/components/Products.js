@@ -100,7 +100,7 @@ class Products extends Component {
                                 </button>
                                 <div className="modal__info">
                                     
-                                    <Magnifier src={this.state.product.image} className="modal__img" width={400} mgWidth={180} mgHeight={180} mgShape={'square'} alt={this.state.product.title}/>
+                                    <img className="modal__img" src={this.state.product.image} alt={this.state.product.title}></img>
 
                                     <div className="modal__detail">
                                         <div className="modal__title">

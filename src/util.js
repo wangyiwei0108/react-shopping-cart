@@ -1,3 +1,4 @@
 export default function formatCurrency(num) {
-    return Number(num).toLocaleString('en-IN',{style:'currency',currency: 'USD'}) + " ";
+    return Number(num.toFixed(1)).toLocaleString('en-US',{style:'currency',currency: 'USD'}) + " ";
 }
+
