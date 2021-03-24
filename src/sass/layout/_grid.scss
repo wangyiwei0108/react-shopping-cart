@@ -5,8 +5,9 @@
 .container { 
     display: grid;
     grid-template-areas: "header" "main" "footer";
-    grid-template-rows: 7vh auto 1fr;
+    grid-template-rows: 7vh auto auto;
     grid-template-columns: 1fr;
+
   }
 
 .header {
@@ -67,31 +68,60 @@
 
     &__content {
         display: grid;
-        grid-template-rows: [row-filter-start] 5rem [row-filter-end row-list-start] 1fr [row-list-end];
-        grid-template-columns: [col-list-start] 1fr [col-list-end col-sidebar-start] 23vw [col-sidebar-end];
+        grid-template-rows: [row-filter-start] 7rem [row-filter-end row-list-start] auto [row-list-end];
+        grid-template-columns: [col-list-start] 1fr [col-list-end col-sidebar-start] 24vw [col-sidebar-end];
+
+        @include respond(tab-large) {
+            grid-template-columns: [col-list-start] 1fr [col-list-end col-sidebar-start] 25vw [col-sidebar-end];
+        }
+
+        @include respond(tab-medium) {
+            grid-template-columns: [col-list-start] 1fr [col-list-end col-sidebar-start] 26vw [col-sidebar-end];
+        }
+
+        @include respond(tab-small) {
+            grid-template-rows: [row-filter-start] 10rem [row-filter-end row-list-start] 1fr [row-list-end row-sidebar-start] auto [row-sidebar-end];
+            grid-template-columns: [col-list-start] 1fr [col-sidebar-end];
+        }
     }
     
     &__filter {
         grid-row: row-filter-start / row-filter-end;
         grid-column: col-list-start / col-list-end;
-        align-self: center;
         padding: 1.3rem;
 
+        padding-top: 1.8rem;
+
         background-color: $color-grey-light-1;
+
+
     }
     
     &__list {
         grid-row: row-list-start / row-list-end;
         grid-column: col-list-start / col-list-end;
-
         margin: 2rem;
+
+        @include respond(tab-large) {
+            margin: 1.5rem;
+        }
+
+        @include respond(tab-small) {
+            margin: 2rem;
+        }
     }
     
     &__sidebar {
         grid-row: row-filter-start / row-list-end;
         grid-column: col-sidebar-start / col-sidebar-end;
+        align-self: flex-start;
 
         background-color: $color-grey-light-2;
+
+        @include respond(tab-small) {
+            grid-row: row-sidebar-start / row-sidebar-end;
+            grid-column: col-list-start / col-sidebar-end;
+        }
     }
 }
 
@@ -105,13 +135,20 @@
     grid-template-columns: 1fr;
     grid-row-gap: 1rem;
 
-    padding: 3.5rem;
-    padding-top: 1.45rem;
+    padding: 2rem;
+    padding-top: 2.5rem;
+
+    @include respond(tab-small) {
+        grid-template-rows: [header-start] auto [header-end item-start] auto [item-end total-start] auto [total-end];
+        grid-row-gap: 3rem;
+        padding: 5rem 18vw;
+    }
 
     &__header {
         grid-row: header-start / header-end;
     
         text-align: center;
+
     }
 
     &__items {
@@ -123,8 +160,8 @@
 
     &__item {
         display: grid;
-        grid-template-columns: min-content min-content 1fr 1fr min-content;
-        justify-items: center;
+        grid-template-columns: min-content 1fr max-content 1fr;
+        justify-items: flex-start;
         align-items: flex-start;
     
         padding: 1rem;
@@ -132,6 +169,11 @@
         background-color: $color-grey-light-1;
         border: 0.1rem solid $color-grey-light-2;
         border-radius: 2px;
+
+        @include respond(tab-small) {
+            grid-template-columns: min-content max-content 1fr 0.5fr;
+            grid-column-gap: 1rem;
+        }
     
         &:not(:last-child) {
             margin-bottom: 1rem;
@@ -143,11 +185,15 @@
         grid-column: 1 / 2;
         width: 5rem;
         margin-right: 1rem;
+
+        @include respond(tab-small) {
+            margin-right: 0;
+        }
     }
     
     &__item-title {
         grid-row: 1 / 2;
-        grid-column: 2 / 6;
+        grid-column: 2 / -1;
     }
 
     &__item-size {
@@ -158,14 +204,15 @@
     
     &__item-amount {
         grid-row: 2 / 3;
-        grid-column: 3 / 5;
+        grid-column: 3 / 4;
         align-self: flex-end;
     }
     
     &__item-remove-btn {
         grid-row: 2 / 3;
-        grid-column: 5 / 6;
+        grid-column: 4 / 5;
         align-self: flex-end;
+        justify-self: flex-end;
         margin-bottom: -0.3rem;
 
         border: none;
@@ -181,6 +228,15 @@
         width: 2rem;
         height: 2rem;
         fill: $color-primary-5;
+
+        @include respond(tab-large) {
+            width: 1.9rem;
+            height: 1.9rem;
+        }
+          @include respond(tab-medium) {
+            width: 1.8rem;
+            height: 1.8rem;
+        }
     }
 
     &__about-to-proceed {
@@ -279,8 +335,10 @@
 
     &__modal {
         @include modal;
-        width: 50vw;
-        padding: 5rem 0;
+        width: 65vw;
+        height: 75vh;
+        padding: 7rem 0;
+        overflow-y: scroll;
     }
 
     &__details {
@@ -294,10 +352,19 @@
         font-size: $default-font-size;
       }
 
+    &__details ul {
+        padding: 0 4rem;
+        padding-top: 3rem;
+    }
+
     &__details li {
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        &:not(:last-child) {
+            margin-bottom: 1.5rem;
+        }
       }
 
     &__details li div {
@@ -316,11 +383,18 @@
 
 .products {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    grid-column-gap: 2rem;
     grid-row-gap: 3rem;
 
     justify-items: center;
     list-style-type: none;
+
+    @include respond(tab-large) {
+        grid-column-gap: 1.5rem;
+        grid-row-gap: 2rem;
+    }
+    
   }
 
 .product {
@@ -328,9 +402,10 @@
     grid-template-columns: 1fr;
     grid-row-gap: 1rem;
 
+
     &__image {
         & img {
-            max-width: 25rem;
+            width: 100%;
             opacity: 1;
             transition: .3s ease;
           }
@@ -366,6 +441,44 @@
     align-items: center;
     margin: 0 3rem;
 
+    @include respond(tab-small) {
+        grid-template-rows: max-content max-content; 
+        grid-row-gap: 1.2rem;
+    }
+
+    &__result {
+        @include respond(tab-small) {
+            grid-row: 1 / 2;
+            grid-column-gap: 1 / 5;
+        }
+    }
+
+    &__search {
+        @include respond(tab-small) {
+            grid-row: 2 / 3;
+            grid-column: 1 / 2;
+        }
+
+        @include respond(tab-smallest) {
+            grid-row: 1 / 2;
+            grid-column: 2 / 4;
+        }
+    }
+
+    &__size {
+        @include respond(tab-small) {
+            grid-row: 2 / 3;
+            grid-column: 2 / 3;
+        }
+    }
+
+    &__sort {
+        @include respond(tab-small) {
+            grid-row: 2 / 3;
+            grid-column: 3 / 4;
+        }
+    }
+
     &__search, &__sort, &__size {
         display: flex;
         align-items: center;
@@ -376,12 +489,27 @@
             fill: $color-primary-5;
 
             margin-right: 1rem;
+
+            @include respond(tab-large) {
+                width: 2.4rem;
+                height: 2.4rem;
+            }
+
         }
     }
 
     &__size--svg {
         width: 2rem;
         height: 2rem;
+
+        @include respond(tab-large) {
+            width: 1.9rem;
+            height: 1.9rem;
+        }
+          @include respond(tab-medium) {
+            width: 1.8rem;
+            height: 1.8rem;
+        }
     }
 
     &__form {
@@ -394,6 +522,10 @@
         font-family: $default-font;
         font-size: $default-font-size;
 
+          @include respond(tab-medium) {
+            padding: 0.1rem;
+        }
+
         &:focus {
             outline: none;
         }
@@ -402,12 +534,22 @@
             padding-right: 2.2rem;
             padding-left: 2.2rem;
 
-            width: 65%;
+            width: 70%;
             transition: all 0.3s ease;
+
+            @include respond(tab-smallest) {
+                width: 100%;
+                margin-left: -0.2rem;
+                padding-right: 0.6rem;
+            }
         
             &:focus {
-                width: 85%;
+                width: 80%;
                 background-color: transparent;
+
+                @include respond(tab-smallest) {
+                    width: 100%;
+                }
             }
         
             &::-webkit-input-placeholder {
@@ -627,37 +769,77 @@ margin: -1.6rem;
         @include modal;
         width: 70vw;
         outline: none;
+
+        @include respond(tab-small) {
+            width: 60vw;
+            height: 70vh;
+            overflow-y: scroll;
+        }
     }
 
     &__container {
         display: flex;
         font-family: $default-font;
         font-size: $default-font-size;
+        justify-content: flex-start;
+
+        @include respond(tab-small) {
+            justify-content: center;
+        }
     }
 
     &__info {
         display: grid;
-        grid-template-columns: min-content 30vw;
+        grid-template-columns: min-content 35vw;
+        grid-template-rows: auto;
         grid-column-gap: 6rem;
         padding: 2rem;
-        justify-content: center;
+
+        @include respond(tab-large) {
+            grid-column-gap: 5rem;
+        }
+
+        @include respond(tab-medium) {
+            grid-template-columns: min-content 34vw;
+            grid-column-gap: 3rem;
+            padding: 1.5rem;
+        }
+
+        @include respond(tab-small) {
+            padding: 3rem;
+            grid-template-columns: min-content;
+            grid-template-rows: min-content auto;
+            row-gap: 2rem;
+        }
+
     }
 
     &__img {
-        grid-row: 2 / 3;
+        grid-row: 1 / 2;
         grid-column: 1 / 2;
 
-        width: 26vw;
+        width: 25vw;
+
+        @include respond(tab-small) {
+            grid-row: 2 / 3;
+            width: 42vw;
+        }
     }
 
     &__detail {
-        grid-row: 2 / 3;
+        grid-row: 1 / 2;
         grid-column: 2 / 3;
         align-content: center;
 
         display: grid;
-        grid-template-rows: repeat(4, max-content);
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, min-content);
         grid-row-gap: 1rem;
+
+        @include respond(tab-small) {
+            grid-row: 1 / 2;
+            grid-column: 1 / 2;
+        }
     }
 
     &__title {
@@ -667,6 +849,16 @@ margin: -1.6rem;
     &__description {
         margin-bottom: 2rem;
         padding-bottom: 4rem;
+
+        @include respond(tab-large) {
+            margin-bottom: 1.5rem;
+            padding-bottom: 3rem;
+        }
+
+        @include respond(tab-medium) {
+            margin-bottom: 1rem;
+            padding-bottom: 2rem;
+        }
     }
 
     &__sq-form {
