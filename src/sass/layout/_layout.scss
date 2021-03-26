@@ -1,0 +1,138 @@
+// App.js
+
+.container { 
+    display: grid;
+    grid-template-areas: "header" "main" "footer";
+    grid-template-rows: 7vh auto auto;
+    grid-template-columns: 1fr;
+
+    &__header {
+        grid-area: header;
+        background-color: $color-primary-5;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        display: grid;
+        grid-template-columns: repeat(3, max-content);
+        grid-column-gap: 1rem;
+        align-content: center;
+        justify-content: flex-start;
+        font-size: 2rem;
+        padding: 2rem;
+    
+        a {
+            color: $color-grey-light-1;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 1.55rem;
+            transition: all 0.1s ease;
+    
+            &:hover {
+                background-color: rgba($color-grey-light-1, 0.1);
+            }
+        }
+    }
+
+    &__main {
+        grid-area: main;
+    }
+
+    &__footer {
+        grid-area: footer;
+        background-color: $color-primary-5;
+        text-align: center;
+        color: $color-grey-light-1;
+        padding: 2rem;
+    
+        a {
+            color: $color-grey-light-1;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+    }
+}
+
+
+// HomeScreen.js
+
+.home {
+    display: grid;
+    grid-template-columns: [col-store-start] 1fr [col-store-end col-map-start] 1fr [col-map-end];
+    grid-template-rows: [row-store-start] max-content [row-store-end];
+    align-items: flex-start;
+    
+    @include respond(-medium) {
+        grid-template-columns: [col-store-start] 1fr [col-store-end];
+        grid-template-rows: [row-store-start] min-content [row-store-end row-map-start] min-content [row-map-end];
+    }
+
+    &__store {
+        grid-column: col-store-start / col-store-end;
+        grid-row: row-store-start / row-store-end;
+        padding: 2rem;
+
+        @include respond(-medium) {
+            grid-column: col-store-start / col-store-end;
+            grid-row: row-store-start / row-store-end;
+        }
+    }
+
+    &__map {
+        grid-column: col-map-start / col-map-end;
+        grid-row: row-store-start / row-store-end;
+
+        @include respond(-medium) {
+            grid-column: col-store-start / col-store-end;
+            grid-row: row-map-start / row-map-end;
+            justify-self: center;
+        }
+    }
+}
+
+
+// ProductsScreen.js
+
+.products {
+    display: grid;
+    grid-template-rows: [row-filter-start] 7rem [row-filter-end row-list-start] auto [row-list-end];
+    grid-template-columns: [col-list-start] 1fr [col-list-end col-sidebar-start] 24vw [col-sidebar-end];
+
+    @include respond(-large) {
+        grid-template-columns: [col-list-start] 1fr [col-list-end col-sidebar-start] 25vw [col-sidebar-end];
+    }
+
+    @include respond(-medium) {
+        grid-template-columns: [col-list-start] 1fr [col-list-end col-sidebar-start] 26vw [col-sidebar-end];
+    }
+
+    @include respond(-small) {
+        grid-template-rows: [row-filter-start] 10rem [row-filter-end row-list-start] 1fr [row-list-end row-sidebar-start] auto [row-sidebar-end];
+        grid-template-columns: [col-list-start] 1fr [col-sidebar-end];
+    }
+    
+    &__filter {
+        grid-row: row-filter-start / row-filter-end;
+        grid-column: col-list-start / col-list-end;
+        padding: 1.3rem;
+        padding-top: 1.8rem;
+        background-color: $color-grey-light-1;
+    }
+    
+    &__list {
+        grid-row: row-list-start / row-list-end;
+        grid-column: col-list-start / col-list-end;
+    }
+    
+    &__cart {
+        grid-row: row-filter-start / row-list-end;
+        grid-column: col-sidebar-start / col-sidebar-end;
+        align-self: flex-start;
+        background-color: $color-grey-light-2;
+
+        @include respond(-small) {
+            grid-row: row-sidebar-start / row-sidebar-end;
+            grid-column: col-list-start / col-sidebar-end;
+        }
+    }
+}

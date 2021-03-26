@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 // import data from './data.json';
-import store from './store';
+import store from './redux/store';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import ProductsScreen from './screens/ProductsScreen';
 import AdminScreen from './screens/AdminScreen';
@@ -80,31 +80,31 @@ class App extends React.Component {
 //   }
 // };
 
-  render () {
-    return (  
-      <Provider store={store}>
-        <BrowserRouter>
-          <div className="container">
-            <header className="header">
-              <Link className="header__home" to="/">Store</Link>
-              <Link className="header__products" to="/products">Product</Link>
-              <Link className="header__admin" to="/admin">Admin</Link>
-            </header>
-            <body>
-              <main className="main">
-                <Route path="/" component={HomeScreen} exact/>
-                <Route path="/admin" component={AdminScreen} />
-                <Route path="/products" component={ProductsScreen} />
-              </main>
-            </body>
-            <footer className="footer">
-              Sources of text and images are from <a href="https://www.isseymiyake.com/" target="_blank" rel="noreferrer">ISSEY MIYAKE</a>
-            </footer>
-          </div>
-        </BrowserRouter>
-      </Provider>
-    )
-  }
+    render () {
+        return (  
+            <Provider store={store}>
+                <BrowserRouter>
+                    <div className="container">
+                        <header className="container__header">
+                            <Link to="/">Store</Link>
+                            <Link to="/products">Product</Link>
+                            <Link to="/admin">Admin</Link>
+                        </header>
+                        <body>
+                            <main className="container__main">
+                                <Route path="/" component={HomeScreen} exact/>
+                                <Route path="/admin" component={AdminScreen} />
+                                <Route path="/products" component={ProductsScreen} />
+                            </main>
+                        </body>
+                        <footer className="container__footer">
+                            Sources of text and images are from <a href="https://www.isseymiyake.com/" target="_blank" rel="noreferrer">ISSEY MIYAKE</a>
+                        </footer>
+                    </div>
+                </BrowserRouter>
+            </Provider>
+        )
+    }
 }
 
 export default App;

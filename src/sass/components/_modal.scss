@@ -1,0 +1,208 @@
+// ok
+
+.product-modal {
+
+    &__width-height {
+        @include modal;
+        width: 70vw;
+
+        @include respond(-small) {
+            width: 60vw;
+            height: 70vh;
+            overflow-y: scroll;
+        }
+    }
+
+    &__container {
+        display: flex;
+        font-family: $default-font;
+        font-size: $default-font-size;
+        justify-content: flex-start;
+
+        @include respond(-small) {
+            justify-content: center;
+        }
+    }
+
+    &__info {
+        display: grid;
+        grid-template-columns: min-content 35vw;
+        grid-template-rows: auto;
+        grid-column-gap: 6rem;
+        padding: 2rem;
+        height: 75vh;
+
+        @include respond(-large) {
+            grid-column-gap: 5rem;
+        }
+
+        @include respond(-medium) {
+            grid-template-columns: min-content 34vw;
+            grid-column-gap: 3rem;
+            padding: 1.5rem;
+        }
+
+        @include respond(-small) {
+            padding: 3rem;
+            grid-template-columns: min-content;
+            grid-template-rows: min-content auto;
+            row-gap: 2rem;
+        }
+    }
+
+    &__images {
+        grid-row: 1 / 2;
+        grid-column: 1 / 2;
+        overflow-y: scroll;
+
+        @include respond(-small) {
+            grid-row: 2 / 3;
+            width: 42vw;
+            overflow-y: visible;
+        }
+    }
+
+    &__image {
+        width: 25vw;
+        padding: 1rem;
+
+        &:not(:last-child) {
+            margin-bottom: 0.5rem;
+        }
+
+        @include respond(-small) {
+            width: 42vw;
+        }
+    }
+
+    &__details {
+        grid-row: 1 / 2;
+        grid-column: 2 / 3;
+        align-content: center;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, min-content);
+        grid-row-gap: 1rem;
+
+        @include respond(-small) {
+            grid-row: 1 / 2;
+            grid-column: 1 / 2;
+        }
+    }
+
+    &__title {
+        margin-bottom: 1rem;
+    }
+
+    &__description {
+        margin-bottom: 2rem;
+        padding-bottom: 4rem;
+
+        @include respond(-large) {
+            margin-bottom: 1.5rem;
+            padding-bottom: 3rem;
+        }
+
+        @include respond(-medium) {
+            margin-bottom: 1rem;
+            padding-bottom: 2rem;
+        }
+    }
+
+    &__form {
+        display: grid;
+        grid-template-columns: max-content max-content 1fr;
+        grid-column-gap: 3.5rem;
+        justify-items: flex-start;
+        align-items: flex-start;
+        padding-top: 2rem;
+        border-top: 0.2rem solid $color-primary-5;
+
+        h4 {
+            margin-bottom: 1rem;
+        }
+
+        button {
+            justify-self: flex-end;
+        }
+    }
+
+    &__size {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    &__size-option {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+        margin-left: -0.3rem;
+
+        input {
+            width: 1.8rem;
+            height: 1.8rem;
+            margin-right: 0.5rem;
+        }
+    }
+
+
+    &__quantity {
+        
+        :focus {
+            outline: none;
+        }
+
+        select {
+            padding: 0 0.5rem;
+            font-family: inherit;
+            color: $color-grey-dark-1;
+        }
+    }
+}
+
+//////////////////////
+//////////////////////
+////// order modal
+
+.order-modal {
+    @include modal;
+    width: 65vw;
+    height: 75vh;
+    padding: 7rem 0;
+    overflow-y: scroll;
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: $default-font;
+        font-weight: 400;
+        font-size: $default-font-size;
+
+        ul {
+            padding: 0 4rem;
+            padding-top: 3rem;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+    
+            &:not(:last-child) {
+                margin-bottom: 1.5rem;
+            }
+
+            & div {
+                padding: 5px;
+            }   
+        }
+    }
+
+    &__message {
+        color: $color-tertiary-5;
+        margin-bottom: 2rem;
+    }
+}

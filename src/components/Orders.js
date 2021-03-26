@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { fetchOrders } from '../actions/orderActions';
-import formatCurrency from '../util';
+import formatCurrency from './Util';
  
 class Orders extends Component {
     
@@ -11,9 +11,9 @@ class Orders extends Component {
 
     render() {
         const { orders } = this.props;
-        return  !orders ? <p className="loading">Loading...</p>:
+        return ! orders ? <p className="loading">Loading...</p> :
             <div className="orders">
-                <h3 className="orders__heading">Orders</h3>
+                <h3>Orders</h3>
                 <table>
                     <thead>
                         <tr>

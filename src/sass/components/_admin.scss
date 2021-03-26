@@ -1,0 +1,27 @@
+//ok
+
+.orders {
+    margin: 2rem;
+    padding: 3rem;
+    background-color: $color-grey-light-1;
+
+    tbody > tr:nth-child(odd) {
+        background-color: $color-primary-1;
+    }
+
+    table {
+        margin: 1rem;
+        padding: 1rem;
+    }
+      
+    td {
+        padding: 1rem;
+    }
+      
+    th {
+        text-align: left;
+        padding: 1rem;
+    }
+}
+
+
