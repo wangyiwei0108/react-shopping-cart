@@ -1,18 +1,51 @@
-@mixin respond($breakpoint) {
+//ok
 
-    @if $breakpoint == tab-smallest {
+@mixin respond($breakpoint) {
+    @if $breakpoint == -smallest {
         @media only screen and (max-width: 34.375em) { @content };    //550px
     }
-    @if $breakpoint == tab-small {
+    @if $breakpoint == -small {
         @media only screen and (max-width: 53.125em) { @content };    //850px
     }
-    @if $breakpoint == tab-medium {
+    @if $breakpoint == -medium {
         @media only screen and (max-width: 62.5em) { @content };     //1000px
     }
-    @if $breakpoint == tab-large {
+    @if $breakpoint == -large {
         @media only screen and (max-width: 75em) { @content };    //1200px
     }
-    @if $breakpoint == tab-huge {
+    @if $breakpoint == -largest {
         @media only screen and (min-width: 112.5em) { @content };    //1800
+    }
+}
+
+@mixin modal { 
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba($color-grey-light-2, 0.85);
+    box-shadow: 0 2rem 5rem rgba($color-grey-dark-1, 0.3);
+
+    &:focus {
+        outline: none;
+    }
+}
+
+@mixin btn-default {
+    color: $color-grey-dark-1;
+    border-radius: 3px;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    transition: all ease;
+
+    &:hover {
+        transform: translateY(-0.15rem);
+    }
+
+    &:active {
+        transform: translateY(0);
     }
 }

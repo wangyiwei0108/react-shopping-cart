@@ -32,7 +32,10 @@ const Product = mongoose.model(
         _id: { type: String, default: shortid.generate },
         title: String,
         description: String,
-        image: String,
+        image_a: String,
+        image_b: String,
+        image_c: String,
+        image_d: String,
         price: Number,
         availableSizes: [String]
     })
