@@ -32,8 +32,6 @@ const Product = mongoose.model(
         availableSizes: [String]
     })
 )
- 
-// 定義「從 database 裡面取得 list of products」的行為
 
 app.get("/api/products", async (req, res) => {
     const products = await Product.find({});
