@@ -8,26 +8,13 @@ export default class HomeScreen extends Component {
         return (
             <div className="products">
                 <div className="products__filter">
-                    <Filter 
-                    // count={this.state.products.length}
-                    // size={this.state.size}
-                    // sort={this.state.sort}
-                    // filterProducts={this.filterProducts}
-                    // sortProducts={this.sortProducts}
-                    />
+                    <Filter/>
                 </div>
                 <div className="products__list">
-                    <Products 
-                    // products={this.state.products}
-                    // addToCart={this.addToCart}
-                    />
+                    <Products/>
                 </div>
                 <div className="products__cart">
-                    <Cart 
-                    // cartItems={this.state.cartItems}
-                    // removeFromCart={this.removeFromCart}
-                    // createOrder={this.createOrder}
-                    />
+                    <Cart/>
                 </div>
             </div>
         )

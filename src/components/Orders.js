@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { fetchOrders } from '../actions/orderActions';
+import { fetchOrders } from '../redux/actions/orderActions';
 import formatCurrency from './Util';
  
 class Orders extends Component {
@@ -28,21 +28,21 @@ class Orders extends Component {
                     </thead>
                     <tbody>
                         {orders.map((order) => (
-                            <tr>
-                            <td>{order._id}</td>
-                            <td>{order.createdAt}</td>
-                            <td>{formatCurrency(order.total)}</td>
-                            <td>{order.name}</td>
-                            <td>{order.email}</td>
-                            <td>{order.address}</td>
-                            <td>
-                             {order.cartItems.map((item) => (
-                                    <div>
-                                        {item.count} {" x "} {item.title} {" x "} {item.size}
-                                    </div>
-                                ))}
-                            </td>
-                        </tr>
+                            <tr key={order._id}>
+                                <td>{order._id}</td>
+                                <td>{order.createdAt}</td>
+                                <td>{formatCurrency(order.total)}</td>
+                                <td>{order.name}</td>
+                                <td>{order.email}</td>
+                                <td>{order.address}</td>
+                                <td>
+                                {order.cartItems.map((item) => (
+                                        <div key={item._id + item.count}>
+                                            {item.count} {" x "} {item.title} {" x "} {item.size}
+                                        </div>
+                                    ))}
+                                </td>
+                            </tr>
                         ))}
                     </tbody>
                 </table>
@@ -51,11 +51,10 @@ class Orders extends Component {
     }
 }
 
-export default connect(
-    (state) => ({
-       orders: state.order.orders,
-}),
-{
-    fetchOrders
+const stateMapToProps = (state) => {
+    return {
+        orders: state.order.orders
+    }
 }
-)(Orders)
+
+export default connect(stateMapToProps, { fetchOrders })(Orders)
