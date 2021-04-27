@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { HashRouter, Route, Link } from "react-router-dom";
 import ProductsScreen from './screens/ProductsScreen';
 import AdminScreen from './screens/AdminScreen';
 import HomeScreen from './screens/HomeScreen';
@@ -10,7 +10,7 @@ class App extends React.Component {
     render () {
         return (  
             <Provider store={store}>
-                <BrowserRouter>
+                <HashRouter>
                     <div className="container">
                         <header className="container__header">
                             <Link to="/">Store</Link>
@@ -26,7 +26,7 @@ class App extends React.Component {
                             Sources of text and images are from <a href="https://www.isseymiyake.com/" target="_blank" rel="noreferrer">ISSEY MIYAKE</a>
                         </footer>
                     </div>
-                </BrowserRouter>
+                </HashRouter>
             </Provider>
         )
     }
