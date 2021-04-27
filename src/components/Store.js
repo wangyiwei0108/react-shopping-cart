@@ -8,19 +8,19 @@ export default class Store extends Component {
             <div className="store">
                 <div class="store__slider">
                     <div>
-                        <img src="/images/gallery1.jpg" alt="store image" />
+                        <img src="/images/gallery1.jpg" alt="store" />
                     </div>
                     <div>
-                        <img src="/images/gallery2.jpg" alt="store image" />
+                        <img src="/images/gallery2.jpg" alt="store" />
                     </div>
                     <div>
-                        <img src="/images/gallery3.jpg" alt="store image" />
+                        <img src="/images/gallery3.jpg" alt="store" />
                     </div>
                     <div>
-                        <img src="/images/gallery4.jpg" alt="store image" />
+                        <img src="/images/gallery4.jpg" alt="store" />
                     </div>
                     <div>
-                        <img src="/images/gallery5.jpg" alt="store image" />
+                        <img src="/images/gallery5.jpg" alt="store" />
                     </div>
                 </div>
                 <ul className="store__list">
