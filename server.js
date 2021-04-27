@@ -6,15 +6,9 @@ const shortid = require("shortid");
 const app = express();
 app.use(bodyParser.json());
 
-// 以下兩個設定讓 development mode 轉為 prodcution mode
-// localhost:5000/
 app.use("/", express.static(__dirname + "/build"));
 app.get("/", (req, res) => res.sendFile(__dirname + "/build/index.html"))
 
-
-// initialize mongo database 有兩個 parameters
-    // 第一個、連接到 mongodb database 的 url
-    // 第二個、幾個讓 connection 優化的設定
 mongoose.connect(
     process.env.MONGODB_URL || "mongodb://localhost/react-shopping-cart-db", 
     {
@@ -23,8 +17,6 @@ mongoose.connect(
         useUnifiedTopology: true
     }
 );
-
-// 在 db 裡面定義 model
 
 const Product = mongoose.model(
     "products",
@@ -44,12 +36,9 @@ const Product = mongoose.model(
 // 定義「從 database 裡面取得 list of products」的行為
 
 app.get("/api/products", async (req, res) => {
-    // 呼叫 database 的 Product
     const products = await Product.find({});
     res.send(products);
 });
-
-// 定義「把資料丟進database」的行為（用 postman），並且存起來
 
 app.post("/api/products", async (req, res) => {
     const newProduct = new Product(req.body);
@@ -57,13 +46,10 @@ app.post("/api/products", async (req, res) => {
     res.send(savedProduct);
 });
 
-
-// 定義把資料刪掉的行為
 app.delete("/api/products/:id", async(req, res) => {
     const deletedProduct = await Product.findByIdAndDelete(req.params.id);
     res.send(deletedProduct);
 });
-
 
 const Order = mongoose.model("order", new mongoose.Schema({
     _id: {
@@ -99,7 +85,7 @@ app.post("/api/orders", async (req, res) => {
     ) {
         return res.send({ message: "Data is required." })
     }
-    // 為什麼不是 new Order？
+
     const order = await Order(req.body).save();
     res.send(order);
 });
@@ -113,9 +99,6 @@ app.delete("/api/orders/:id", async(req, res) => {
     const order = await Order.findByIdAndDelete(req.params.id);
     res.send(order);
 })
-
-
-// 定義 port
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log("serve at http://localhost:5000"));

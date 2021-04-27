@@ -6,11 +6,26 @@ export default class Store extends Component {
     render() {
         return (
             <div className="store">
-                <img className="store__img" alt="store" src="/images/gallery1.jpg" />
-
+                <div class="store__slider">
+                    <div>
+                        <img src="/images/gallery1.jpg" alt="store image" />
+                    </div>
+                    <div>
+                        <img src="/images/gallery2.jpg" alt="store image" />
+                    </div>
+                    <div>
+                        <img src="/images/gallery3.jpg" alt="store image" />
+                    </div>
+                    <div>
+                        <img src="/images/gallery4.jpg" alt="store image" />
+                    </div>
+                    <div>
+                        <img src="/images/gallery5.jpg" alt="store image" />
+                    </div>
+                </div>
                 <ul className="store__list">
                     {storesData.stores.map((store) => (
-                        <li className="store__info">
+                        <li className="store__info" key={store.name}>
                             <h4 className="store__name">{store.name}</h4>
 
                             <svg className="store__address--svg">
@@ -38,4 +53,3 @@ export default class Store extends Component {
         )
     }
 }
-

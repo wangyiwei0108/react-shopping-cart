@@ -1,10 +1,6 @@
-import { CLEAR_CART, CLEAR_ORDER, CREATE_ORDER, FETCH_ORDERS } from "../types"
-
-
-// 從前端傳送 ajax request 到 server 來建立 order
+import { CLEAR_ORDER, CREATE_ORDER, FETCH_ORDERS } from "../types"
 
 export const createOrder = (order) => (dispatch) => {
-    // 先把資料以 json 格式傳進 server 處理，在 server 以 bodyParser 處理後，儲存在 db
     fetch("/api/orders", {
         method: "POST",
         headers: {
@@ -12,12 +8,11 @@ export const createOrder = (order) => (dispatch) => {
         },
         body: JSON.stringify(order),
     })
-    // 把資料還原成 js object 格式
-    .then((res) => res.json())
-    .then((data) => {
+
+    .then(res => res.json())
+    .then(data => {
         dispatch({ type: CREATE_ORDER, payload: data });
         localStorage.clear("cartItems");
-        dispatch({ type: CLEAR_CART }); // ???
     });
 };
 
@@ -27,8 +22,8 @@ export const clearOrder = () => (dispatch) => {
 
 export const fetchOrders = () => (dispatch) => {
     fetch("/api/orders")
-        .then((res) => res.json())
-        .then((data) => {
+        .then(res => res.json())
+        .then(data => {
             dispatch({ type: FETCH_ORDERS, payload: data });
         });
-} 
+}
