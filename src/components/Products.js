@@ -6,7 +6,8 @@ import Zoom from "react-reveal/Zoom";
 import { connect } from 'react-redux';
 import { fetchProducts } from '../redux/actions/productActions';
 import { addToCart } from '../redux/actions/cartActions';
- 
+import { Link } from "react-router-dom"; 
+
 class Products extends Component {
 
     constructor(props) {
@@ -63,15 +64,8 @@ class Products extends Component {
                             {this.props.allProducts.map((product) => { return (
                                 <li className="product__item" key={product._id}>
 
-                                    <a className="product__image" onClick={ () => this.openModal(product)} href={"#" + product._id}>
-                                        <img src={product.image_a} alt={product.title}/>
-                                    </a>
-
-                                    <a className="product__title" onClick={ () => this.openModal(product)} href={"#" + product._id}>
-                                        <h4>
-                                            {product.title}
-                                        </h4>
-                                    </a>
+                                <Link className="product__image" to={`#${product._id}`} onClick={ () => this.openModal(product)}> <img src={product.image_a} alt={product.title}/></Link>
+                                <Link className="product__title" to={`#${product._id}`} onClick={ () => this.openModal(product)}> {product.title}</Link>
 
                                     <div className="product__price">
                                         <p>{formatCurrency(product.price)}</p>
