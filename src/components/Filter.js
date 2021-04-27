@@ -40,7 +40,6 @@ class Filter extends Component {
                         value={size}
                         onChange={(e) => filterProducts(products, e.target.value)}>
                             <option value="">All</option>
-                            <option value="S">XS</option>
                             <option value="S">S</option>
                             <option value="M">M</option>
                             <option value="L">L</option>
