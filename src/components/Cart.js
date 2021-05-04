@@ -152,7 +152,7 @@ class Cart extends Component {
                                         <li>
                                             <p>Cart Items:</p>
                                             {order.cartItems.map((x) =>(
-                                                <div key={x._id}>
+                                                <div key={x._id + x.size}>
                                                     <p>{x.title} {" x "} {x.size} {" x "} {x.count}</p>
                                                 </div>
                                             ))}
