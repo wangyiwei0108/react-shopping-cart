@@ -6,7 +6,7 @@ export default class Store extends Component {
     render() {
         return (
             <div className="store">
-                <div class="store__slider">
+                <div className="store__slider">
                     <div>
                         <img src="/images/gallery1.jpg" alt="store" />
                     </div>

@@ -37,7 +37,7 @@ class Orders extends Component {
                                 <td>{order.address}</td>
                                 <td>
                                 {order.cartItems.map((item) => (
-                                        <div key={item._id + item.count}>
+                                        <div key={item._id + item.count + item.size}>
                                             {item.count} {" x "} {item.title} {" x "} {item.size}
                                         </div>
                                     ))}
