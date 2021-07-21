@@ -1,9 +1,0 @@
-.googlemap {
-    width: 50vw;
-    height: 100vh;
-
-    @include respond(-medium) {
-        width: 95vw;
-        height: 50vh;
-    }
-}
